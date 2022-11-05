@@ -9,7 +9,7 @@ export default function AnimatedInterpolation() {
     Animated.timing(translateXAmim, {
       toValue: 100,
       duration: 1000, 
-      useNativeDriver: true,
+      useNativeDriver: false, // true
     }).start();
   }
 
@@ -19,14 +19,13 @@ export default function AnimatedInterpolation() {
       <Animated.View style={{
         width: 100, 
         height: 100,
+        // useNativeDriver를 false로 하니까 됐다! 유후~!
         backgroundColor: translateXAmim.interpolate({
           inputRange: [0, 100],
-          outputRange: ["rgb(90,210,244)" , "rgb(224,82,99)"], 
-          extrapolate: "clamp"
-
+          outputRange: ['rgb(90,210,244)', 'rgb(224,82,99)'],
         })
       }} />
-      {/* <Animated.Text style={{
+      <Animated.Text style={{
         fontSize: 50,
         transform: [
           { translateX: translateXAmim },
@@ -44,7 +43,7 @@ export default function AnimatedInterpolation() {
           }, 
         ], 
 
-      }}>zz🍊</Animated.Text> */}
+      }}>zz🍊</Animated.Text>
     </>
   )
 }
