@@ -51,17 +51,10 @@ export default function AnimatedCollapse() {
               style={[
                 styles.aWrapper,
                 {
-                  opacity: opacityAnim.interpolate({
-                    inputRange: [0, 1], 
-                    outputRange: [1, 0],
-                  }), 
+                  opacity: opacityAnim, 
                   height: opacityAnim.interpolate({
                     inputRange: [0, 1], 
                     outputRange: [100, 0],
-                  }),
-                  padding: opacityAnim.interpolate({
-                    inputRange: [0, 1], 
-                    outputRange: [10, 0],
                   }),
               },{
               }
@@ -86,7 +79,7 @@ const styles = StyleSheet.create({
   aWrapper: {
     borderBottomColor: '#f2f2f2', 
     borderBottomWidth: 1, 
-    marginHorizontal: 10, 
+    marginHorizontal: 20, 
     justifyContent: 'center'
   }
 })
