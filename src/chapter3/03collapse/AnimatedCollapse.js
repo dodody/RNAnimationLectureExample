@@ -1,50 +1,92 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import { StyleSheet, Text, View, Animated, TouchableWithoutFeedback } from 'react-native'; 
-import {data} from './data'
+import { data } from './data'
+import Icon from 'react-native-vector-icons/dist/MaterialIcons'
 
 export default function AnimatedCollapse() {
-  const collapseAnim = useRef(new Animated.Value(1)).current;
-  const onPress = () => {
-    Animated.timing(collapseAnim, {
-      toValue: 0, 
-      useNativeDriver: false, 
-    }).start(); 
-  }
   return (
     <View>
-      {data.map((val, idx) => (
-        <View key={idx}>
-          <TouchableWithoutFeedback onPress={onPress}>
-            <View style={styles.qWrapper}>
-              <Text style={{fontSize: 16}}>{val.q}</Text>
-            </View>
-          </TouchableWithoutFeedback>
-          {/* // ! 여기서 막히네 */}
-          <Animated.View style={[styles.aWrapper, {
-            // height: 0, 
-            borderWidth: 1, 
-            // padding: 20, 
-            transform: [{
-              scaleY: collapseAnim
+      {data.map((value, index) => {
+        const opacityAnim = useRef(new Animated.Value(1)).current;
+        const [isOpen, setIsOpen] = useState(false)
+        // collapse의 열러있냐, 닫혀있냐 상태를 확인하기 위해서
 
-            }]
-          }]}>
-            <Text style={{color: '#333'}}>{val.a}</Text>
-          </Animated.View>
-        </View>
-      ))}
+        const onPress = (index) => {
+          setIsOpen(value => !value)
+          Animated.timing(opacityAnim, {
+            toValue: isOpen ? 1 : 0,  
+            duration: 200, 
+            useNativeDriver: false, 
+          }).start(); 
+        }
+
+        return (
+          <View key={index}>
+            <TouchableWithoutFeedback onPress={() => onPress(index)}>
+              <View style={styles.qWrapper}>
+                <Text style={{ fontSize: 16, flex: 1, color: 'white' }}>{value.q}</Text>
+                <Animated.View style={{
+                  paddingLeft: 10, 
+                  transform: [
+                    {
+                      rotate: opacityAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: ['180deg', '0deg']
+                      })
+                    }, 
+                    {
+                      translateX: opacityAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [-13, 0]
+                      })
+                    }, 
+                  ]
+                }}>
+                  <Icon name="expand-more" size={26} color="white" />
+                </Animated.View>
+              </View>
+            </TouchableWithoutFeedback>
+
+            <Animated.View
+              style={[
+                styles.aWrapper,
+                {
+                  opacity: opacityAnim.interpolate({
+                    inputRange: [0, 1], 
+                    outputRange: [1, 0],
+                  }), 
+                  height: opacityAnim.interpolate({
+                    inputRange: [0, 1], 
+                    outputRange: [100, 0],
+                  }),
+                  padding: opacityAnim.interpolate({
+                    inputRange: [0, 1], 
+                    outputRange: [10, 0],
+                  }),
+              },{
+              }
+            ]}>
+              <Text style={{color: '#333'}}>{value.a}</Text>
+            </Animated.View>
+          </View>
+        )
+      })}
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   qWrapper: {
-    backgroundColor: '#ffa100', 
-    padding: 20, 
+    backgroundColor: '#0066eb', 
+    padding: 20,
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'space-between', 
   }, 
   aWrapper: {
-    paddingHorizontal: 30, 
     borderBottomColor: '#f2f2f2', 
     borderBottomWidth: 1, 
+    marginHorizontal: 10, 
+    justifyContent: 'center'
   }
 })
