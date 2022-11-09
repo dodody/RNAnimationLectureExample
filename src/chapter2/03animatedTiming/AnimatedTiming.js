@@ -3,7 +3,7 @@ import { Animated, View, Text, Button } from 'react-native'
 
 export default function AnimatedTiming() {
   const translateXAnim = useRef(new Animated.Value(-100)).current
-  const onTimingPress = () => {
+  const onTimingP,ress = () => {
     Animated.timing(translateXAnim, {
       toValue: 100,
     }).start()
