@@ -1,6 +1,7 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 
+import AnimatedValue from "./src/chapter2/02AnimatedValue/AnimatedValue";
 import AnimatedDecay from "./src/chapter2/05animatedDecay/AnimatedDecay";
 import AnimatedCombining from "./src/chapter2/06animatedCombining/AnimatedCombining";
 
@@ -15,7 +16,7 @@ import AnimatedCollapse from "./src/chapter3/03collapse/AnimatedCollapse";
 const App = () => {
   return (
     <View style={styles.wrapper}>
-      <AnimatedCollapse />
+      <AnimatedValue />
     </View>
   );
 };
@@ -23,8 +24,8 @@ const App = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
     // backgroundColor: "#ffa100",
   },
 });

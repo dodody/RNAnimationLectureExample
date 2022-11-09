@@ -8,6 +8,7 @@ export default function AnimatedDecay() {
   // 다들 겁을 먹고 이런 간단한 애니메이션에서 쓰임새가 없다고 그냥 기억에서 지워버리시는데
   // 우린 제스쳐를 이용한 다양한 애니메이션을 줄것이기 때문에,
   // 초기에 속도가 있어야 하고, ㅡㄱ때
+  
   const windowWidth = Dimensions.get("window").width;
   const translateXAnim = useRef(new Animated.Value(-70)).current;
   const onCarPress = () => {
