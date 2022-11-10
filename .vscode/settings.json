@@ -2,5 +2,5 @@
   "workbench.colorTheme": "Default Dark+",
   "files.autoSave": "onFocusChange",
   "editor.formatOnSave": true,
-  "editor.fontSize": 11.5
+  "editor.fontSize": 12
 }
