@@ -17,6 +17,10 @@ export default function DrawerMenu() {
     });
   }
 
+  // 밖에서 header
+  // 누르면 메뉴가 펼쳐진다.
+  // 메뉴가 펼쳐지고, 그거 백그라운드
+
   return (
     <>
       {/* 메뉴 */}

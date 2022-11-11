@@ -7,19 +7,19 @@ export default function SnackbarAnimation() {
   const translateYAnim = useRef(new Animated.Value(100)).current;
   const onButtonPress = () => {
     translateYAnim.setValue(100);
-    Animated.timing(translateYAnim, {
-      toValue: 0, 
-      duration: 300, 
-      useNativeDriver: true, 
-    }).start(() => {
-      setTimeout(() => {
-        Animated.timing(translateYAnim, {
-          toValue: 100, 
-          duration: 300, 
-          useNativeDriver: true, 
-        }).start()
-      }, 1500)
-    });
+
+    Animated.stagger(1500, [
+      Animated.timing(translateYAnim, {
+        toValue: 0, 
+        duration: 300, 
+        useNativeDriver: true, 
+      }),
+      Animated.timing(translateYAnim, {
+        toValue: 100, 
+        duration: 300, 
+        useNativeDriver: true, 
+      })
+    ]).start()
   };
 
   return (
