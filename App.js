@@ -20,7 +20,7 @@ import AnimatedCollapse from "./src/chapter3/03collapse/AnimatedCollapse";
 const App = () => {
   return (
     <View style={styles.wrapper}>
-      <AnimatedOtherMethod />
+      <DrawerMenu />
     </View>
   );
 };
@@ -28,8 +28,8 @@ const App = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
     // backgroundColor: "#ffa100",
   },
 });
