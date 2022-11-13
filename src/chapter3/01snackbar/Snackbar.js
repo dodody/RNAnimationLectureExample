@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Animated } from "react-native";
 import Icon from "react-native-vector-icons/dist/AntDesign";
-import { getBottomSpace } from 'react-native-iphone-x-helper'
+import { getBottomSpace } from "react-native-iphone-x-helper";
 
 export default function Snackbar() {
   return (
@@ -17,7 +17,7 @@ export default function Snackbar() {
 const styles = StyleSheet.create({
   snackbarPosition: {
     position: "absolute",
-    bottom: getBottomSpace() + 10, 
+    bottom: getBottomSpace() + 10,
     width: "100%",
   },
   snackbarBg: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   snackbarText: {
-    fontSize: 14,
+    fontSize: 15,
     color: "white",
     marginLeft: 10,
   },
