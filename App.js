@@ -16,11 +16,12 @@ import Snackbar from "./src/chapter3/01snackbar/Snackbar";
 import SnackbarAnimation from "./src/chapter3/01snackbar/SnackbarAnimation";
 import DrawerMenu from "./src/chapter3/02drawerMenu/DrawerMenu";
 import AnimatedCollapse from "./src/chapter3/03collapse/AnimatedCollapse";
+import Collapse from "./src/chapter3/03collapse/Collapse";
 
 const App = () => {
   return (
     <View style={styles.wrapper}>
-      <DrawerMenu />
+      <Collapse />
     </View>
   );
 };
