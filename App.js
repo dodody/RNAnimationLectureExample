@@ -19,11 +19,12 @@ import AnimatedCollapse from "./src/chapter3/03collapse/AnimatedCollapse";
 import Collapse from "./src/chapter3/03collapse/Collapse";
 import Progressbar from "./src/chapter3/Progressbar";
 import ProgressbarAnimation from "./src/chapter3/ProgressbarAnimation";
+import Skeleton from "./src/chapter3/Skeleton";
 
 const App = () => {
   return (
     <View style={styles.wrapper}>
-      <ProgressbarAnimation />
+      <Skeleton />
     </View>
   );
 };
