@@ -20,11 +20,12 @@ import Collapse from "./src/chapter3/03collapse/Collapse";
 import Progressbar from "./src/chapter3/Progressbar";
 import ProgressbarAnimation from "./src/chapter3/ProgressbarAnimation";
 import Skeleton from "./src/chapter3/Skeleton";
+import SnowBackground from "./src/chapter3/SnowBackground";
 
 const App = () => {
   return (
     <View style={styles.wrapper}>
-      <Skeleton />
+      <SnowBackground />
     </View>
   );
 };
