@@ -1,22 +1,17 @@
 import React, { useRef, useEffect } from "react";
 import { View, Text, SafeAreaView, Animated, Dimensions } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
+import Icon from "react-native-vector-icons/Fontisto";
 
 const arr = [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
-const length = arr.length - 1;
 
-const test = ["50%", "100%"];
-
-export default function SnowAnimation({ delay, speed = 1 }) {
+export default function SnowAnimation({ delay, speed }) {
   const interpolateAnim = useRef(new Animated.Value(0)).current;
-  const { height } = Dimensions.get("window");
-
   useEffect(() => {
     Animated.loop(
       Animated.timing(interpolateAnim, {
         toValue: 1,
         delay,
-        duration: 5000,
+        duration: 10000,
         useNativeDriver: false,
       })
     ).start();
@@ -34,7 +29,7 @@ export default function SnowAnimation({ delay, speed = 1 }) {
         left: `${Math.floor(Math.random() * 100)}%`,
       }}
     >
-      <Icon name="snowflake" color="white" size={20} />
+      <Icon name="snowflake-2" color="white" size={14} />
     </Animated.View>
   );
 }

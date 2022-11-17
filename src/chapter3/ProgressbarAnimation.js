@@ -66,25 +66,6 @@ export default function ProgressbarAnimation() {
   // 우선 sequence 를 사용해서 해봅시다~
   const onAutoRunPress = () => {
     interpolateAnim.setValue(0);
-    // Animated.sequence([
-    //   Animated.timing(interpolateAnim, {
-    //     toValue: 30,
-    //     easing: Easing.in(Easing.bounce),
-    //     useNativeDriver: false,
-    //   }),
-    //   Animated.timing(interpolateAnim, {
-    //     toValue: 70,
-    //     delay: 150,
-    //     easing: Easing.in(Easing.bounce),
-    //     useNativeDriver: false,
-    //   }),
-    //   Animated.timing(interpolateAnim, {
-    //     toValue: 100,
-    //     delay: 150,
-    //     easing: Easing.in(Easing.bounce),
-    //     useNativeDriver: false,
-    //   }),
-    // ]).start();
 
     Animated.stagger(150 + 500, [
       Animated.timing(interpolateAnim, {
@@ -117,9 +98,9 @@ export default function ProgressbarAnimation() {
       useNativeDriver: false,
     }).start();
     // 이렇게 하면, auto run은 잘 작동하는데, run은 작동하지 않습니다.
-    // 왜냐면 value 컨트롤 함수인, extractOffset를 이용해 value값을 이동시켜줬었기 때문인데요,
+    // 왜냐면 extractOffset를 이용해 value값을 이동시켜줬었기 때문인데요,
     // 이번에는 extractOffset와 반대 되는 flattenOffset를 이용해 주면 됩니다.
-    // 이번에는 flattenOffset에 대한 설명을 해보겠습니다.
+    // 이번에는 flattenOffset에 대한 설명과 예시를 들어보겠습니다.
     //----------------------------------
     // const animValue = Animated.Value(15);
     // animValue.setOffset(5);
