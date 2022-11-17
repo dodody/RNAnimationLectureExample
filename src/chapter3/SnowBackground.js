@@ -12,12 +12,20 @@ export default function SnowBackground() {
       }}
     >
       {[...Array(100)].map((value, index) => {
+<<<<<<< Updated upstream
         const interpolateAnim = useRef(new Animated.Value(0)).current
+=======
+        const interpolateAnim = useRef(new Animated.Value(0)).current;
+>>>>>>> Stashed changes
         useEffect(() => {
           Animated.loop(
             Animated.timing(interpolateAnim, {
               toValue: 1,
+<<<<<<< Updated upstream
               delay: index * 100,
+=======
+              delay: index * 200,
+>>>>>>> Stashed changes
               duration: 5000,
               useNativeDriver: false,
             }),
