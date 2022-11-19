@@ -5,6 +5,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   LayoutAnimation,
+  Button,
 } from "react-native";
 
 if (Platform.OS === "android") {
@@ -14,52 +15,45 @@ if (Platform.OS === "android") {
 }
 
 export default function LayoutAnimationIntro() {
-  const [expanded, setExpanded] = useState(1);
+  const [show, setShow] = useState(true);
   const [count, setCount] = useState(1);
 
-  const onPress = () => {
+  const onButtonPress = () => {
+    setShow((value) => !value);
+    setCount((value) => value * 10);
+
     LayoutAnimation.configureNext(
       {
-        duration: 300,
-        create: { type: "easeIn", property: "scaleX" },
-        update: { type: "spring", springDamping: 0.4 },
-        delete: { type: "easeIn", property: "scaleY" },
+        duration: 500,
+        create: { type: "linear", property: "opacity" },
+        update: { type: "spring", property: "scaleX", springDamping: 0.4 },
+        delete: { type: "easeIn", property: "scaleXY", delay: 300 },
       },
       () => console.log("end"),
       () => console.log("fail")
     );
-    // setExpanded(expanded + 1);
-    setCount(count + 1);
+
+    // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   };
 
+  //
+  //
+  // 그리고 상태를 컴포넌트와 연결해주겠습니다. 함수에도 연결해줄게요
+  //
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <TouchableWithoutFeedback onPress={onPress}>
-        <Text>LayoutAnimationIntro</Text>
-      </TouchableWithoutFeedback>
-
-      <TouchableWithoutFeedback
-        onPress={() => {
-          setExpanded(expanded + 1);
-        }}
-      >
-        <Text>LayoutAnimationIntro</Text>
-      </TouchableWithoutFeedback>
-
+      <Button title="애니메이션 작동!" onPress={onButtonPress} />
       {/*  */}
-      <Text>Press me to {expanded}!</Text>
-      {expanded % 2 === 1 && (
-        <View style={{ backgroundColor: "red" }}>
-          <Text>I disappear sometimes!</Text>
-        </View>
-      )}
-
-      {/*  */}
-      {count && (
-        <View style={{ backgroundColor: "red" }}>
+      <View style={{ width: 300, height: 300 }}>
+        <View style={{ backgroundColor: "orange" }}>
           <Text style={{ fontSize: 60 }}>{count * 10}</Text>
         </View>
-      )}
+        {show && (
+          <View style={{ backgroundColor: "orange", marginTop: 10 }}>
+            <Text style={{ fontSize: 30 }}>보이는 컴포넌트</Text>
+          </View>
+        )}
+      </View>
     </View>
   );
 }

@@ -23,6 +23,7 @@ import Skeleton from "./src/chapter3/Skeleton";
 import SnowBackground from "./src/chapter3/SnowBackground";
 
 import LayoutAnimationIntro from "./src/chapter4/LayoutAnimationIntro";
+import LayoutAnimationPageHeader from "./src/chapter4/LayoutAnimationPageHeader";
 
 const App = () => {
   return (
