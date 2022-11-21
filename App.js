@@ -26,10 +26,16 @@ import LayoutAnimationIntro from './src/chapter4/LayoutAnimationIntro'
 import LayoutAnimationPageHeader from './src/chapter4/LayoutAnimationPageHeader'
 import LayoutAnimationCollapse from './src/chapter4/LayoutAnimationCollapse'
 
+import InteractionManagerIntro from "./src/chapter5/InteractionManagerBasic";
+
+import PanresponderBasic from "./src/chapter6/PanresponderBasic";
+import PanresponderBall from "./src/chapter6/PanresponderBall";
+import PanresponderBox from "./src/chapter6/PanresponderBox";
+
 const App = () => {
   return (
     <View style={styles.wrapper}>
-      <LayoutAnimationCollapse />
+      <InteractionManagerIntro />
     </View>
   )
 }
