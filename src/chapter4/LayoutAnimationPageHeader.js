@@ -5,43 +5,38 @@ import {
   LayoutAnimation,
   ScrollView,
   StatusBar,
-} from "react-native";
-import React, { useState, useRef, useEffect } from "react";
-import Icon from "react-native-vector-icons/MaterialIcons";
+} from 'react-native'
+import React, { useState, useRef } from 'react'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export default function LayoutAnimationPageHeader() {
-  const scrollRef = useRef();
-  const [expanded, setExpanded] = useState(true);
+  const scrollRef = useRef()
+  const [expanded, setExpanded] = useState(true)
 
-  useEffect(() => {
-    scrollRef.current?.scrollTo({ x: 0, y: 0 });
-  }, []);
-
-  const onScrollAction = (e) => {
+  const onScroll = (e) => {
     if (e > 10) {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-      setExpanded(false);
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+      setExpanded(false)
     } else {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-      setExpanded(true);
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+      setExpanded(true)
     }
-  };
+  }
 
   return (
     <>
-      <StatusBar barStyle={"light-content"} />
+      <StatusBar barStyle={'light-content'} />
       <ScrollView
-        ref={scrollRef}
         contentContainerStyle={{ height: 1000 }}
         scrollEventThrottle={1}
-        onScroll={(e) => onScrollAction(e.nativeEvent.contentOffset.y)}
+        onScroll={(e) => onScroll(e.nativeEvent.contentOffset.y)}
       >
         <View>
           {!expanded ? (
             <View>
               <View style={styles.wrapper}>
                 <View style={styles.profileWrapper}>
-                  <Icon name={"person"} size={140} color="#333" />
+                  <Icon name={'person'} size={140} color="#333" />
                 </View>
               </View>
               <View style={styles.profileTextWrapper}>
@@ -54,9 +49,9 @@ export default function LayoutAnimationPageHeader() {
           ) : (
             <View>
               <View style={styles.simpleWrapper}>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: 'row' }}>
                   <View style={styles.simpleProfileWrapper}>
-                    <Icon name={"person"} size={40} color="#333" />
+                    <Icon name={'person'} size={40} color="#333" />
                   </View>
                   <View style={styles.simpleProfileTextWrapper}>
                     <Text style={styles.simpleTitle}>개발자 도디</Text>
@@ -71,15 +66,15 @@ export default function LayoutAnimationPageHeader() {
         </View>
       </ScrollView>
     </>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   // heavy mode
   wrapper: {
-    backgroundColor: "#333",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#333',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingTop: 30,
   },
   profileWrapper: {
@@ -88,9 +83,9 @@ const styles = StyleSheet.create({
     width: 180,
     height: 180,
     borderRadius: 1000,
-    backgroundColor: "#222",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#222',
+    justifyContent: 'center',
+    alignItems: 'center',
     shadowOffset: {
       width: 10,
       height: -10,
@@ -100,12 +95,12 @@ const styles = StyleSheet.create({
   },
   profileTextWrapper: {
     height: 1200,
-    alignItems: "center",
+    alignItems: 'center',
     paddingTop: 50,
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 8,
   },
   subTitle: {
@@ -115,26 +110,26 @@ const styles = StyleSheet.create({
   // simple mode
   simpleWrapper: {
     height: 110,
-    backgroundColor: "#333",
+    backgroundColor: '#333',
     paddingLeft: 20,
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     zIndex: 10000,
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
-    width: "100%",
-    alignContent: "stretch",
-    flexDirection: "row",
+    width: '100%',
+    alignContent: 'stretch',
+    flexDirection: 'row',
   },
 
   simpleProfileWrapper: {
     width: 60,
     height: 60,
-    backgroundColor: "#222",
+    backgroundColor: '#222',
     borderRadius: 100,
     marginBottom: -10,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     shadowOffset: {
       width: 10,
       height: -10,
@@ -144,11 +139,11 @@ const styles = StyleSheet.create({
   },
   simpleProfileTextWrapper: {
     marginLeft: 15,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 8,
   },
   subTitle: {
@@ -156,12 +151,12 @@ const styles = StyleSheet.create({
   },
   simpleTitle: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 1,
-    color: "#f2f2f2",
+    color: '#f2f2f2',
   },
   simpleSubTitle: {
     fontSize: 12,
-    color: "#f2f2f2",
+    color: '#f2f2f2',
   },
-});
+})
