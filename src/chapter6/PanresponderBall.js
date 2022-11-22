@@ -1,84 +1,77 @@
 import React, { useRef } from "react";
-import { View, Text, Animated, PanResponder } from "react-native";
+import {
+  View,
+  Text,
+  Animated,
+  PanResponder,
+  SafeAreaView,
+  Alert,
+} from "react-native";
 
 export default function PanresponderBall() {
   const panAnim = useRef(new Animated.ValueXY(0)).current;
   const panResponder = PanResponder.create({
+    // ----------------------------------------
     // panresponder 옵션
+    // ----------------------------------------
     onStartShouldSetPanResponder: (evt, gestureState) => true,
-    onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+    // 터치 이벤트 중 onPanResponderStart 반응을 할지
     onMoveShouldSetPanResponder: (evt, gestureState) => true,
-    onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+    // 터치 이벤트 중 onPanResponderMove 반응을 할지
 
-    // panresponder 액션 핸들러
-    onPanResponderGrant: (evt, gestureState) => {
-      console.log("onPanResponderGrant : 제스쳐가 시작될 때", gestureState);
-      panAnim.extractOffset(); // value에 값을 주는 것
-      //----------------------------------
-      // const animValue = Animated.Value(15);
-      // animValue.setOffset(5);
+    // ----------------------------------------
+    // panresponder 응답 리스폰스
+    // view에서 터치를 시도할때 둘중 하나가 응답을 하게 된다.
+    // ----------------------------------------
+    onPanResponderGrant: (evt, gestureState) => {},
+    // 터치가 성공적으로 작동할 때
+    onPanResponderReject: (evt, gestureState) => {},
+    // 현재 다른 액션을 하고 있고, 응답할 수 없을 때
 
-      // animValue.extractOffset();
-      //value = 0;
-      //offset = 20;
-      //----------------------------------
+    // ----------------------------------------
+    // panresponder 터치 핸들러
+    // ----------------------------------------
+    // 시작값을 잘 넣어줘야 합니다. 안그러면 애니메이션이 튑니다
+    onPanResponderStart: (evt, gestureState) => {
+      console.log("onPanResponderGrant");
+      // panAnim.setOffset({
+      //   x: panAnim.x._value,
+      //   y: panAnim.y._value,
+      // });
     },
 
-    onPanResponderMove: (evt, gestureState) => {
-      // console.log("onPanResponderMove");
-      Animated.event([null, { dx: panAnim.x, dy: panAnim.y }], {
-        useNativeDriver: true,
-        listener: (event, gestureState) =>
-          console.log("dody", event, gestureState),
-      });
-    },
+    // 말 그대로 움직일 때
+    onPanResponderMove: Animated.event(
+      [null, { dx: panAnim.x, dy: panAnim.y }],
+      {
+        listener: (evt, gestureState) => {
+          console.log("onPanResponderMove : ", gestureState);
+          // {"_accountsForMovesUpTo": 195611159.62391666, "dx": 63.66667175292969, "dy": 103.33334350585938, "moveX": 105, "moveY": 168, "numberActiveTouches": 1, "stateID": 0.5676385853410391, "vx": 0.0042177695229660556, "vy": 0, "x0": 41.33332824707031, "y0": 64.66665649414062}
+        },
+        useNativeDriver: false,
+      }
+    ),
 
-    // onPanResponderMove: (evt, gestureState) => {
-    //   Animated.event([null, { dx: panAnim.x, dy: panAnim.y }], {
-    //     useNativeDriver: true,
-    //     listener: (event, gestureState) =>
-    //       console.log("dody", event, gestureState),
-    //   });
-    // },
-
+    // 터치 이벤트가 끝났을 떄
+    onPanResponderEnd: (evt, gestureState) => {},
     onPanResponderRelease: (evt, gestureState) => {
-      console.log("onPanResponderRelease : 제스쳐가 끝날 때", gestureState);
-      // 애니메이션이 끝날 떄 속도를 알 수 있으니까, 터치를 놓았을때의 속도를 사용해서 하는 셈.
+      // panAnim.flattenOffset(); // offset 값을 value로 넣어주는
       Animated.decay(panAnim, {
         velocity: { x: gestureState.vx, y: gestureState.vy },
+        deceleration: 0.997,
         useNativeDriver: true,
       }).start();
-      // panAnim.flattenOffset();
-      //----------------------------------
-      // const animValue = Animated.Value(15);
-      // animValue.setOffset(5);
-
-      // animValue.flattenOffset();
-
-      // value = 20;
-      // offset = 0;
-      //----------------------------------
     },
-    onPanResponderTerminate: (evt, gestureState) => {
-      console.log("onPanResponderTerminate");
-      // Another component has become the responder, so this gesture
-      // should be cancelled
-    },
-    // onShouldBlockNativeResponder: (evt, gestureState) => {
-    //   console.log("onShouldBlockNativeResponder");
-    //   // Returns whether this component should block native components from becoming the JS
-    //   // responder. Returns true by default. Is currently only supported on android.
-    //   return true;
-    // },
   });
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View style={{ flex: 1 }} {...panResponder.panHandlers}>
       <Animated.View
         // 구조분해할당
-        {...panResponder.panHandlers}
         style={{
           transform: [{ translateX: panAnim.x }, { translateY: panAnim.y }],
+          position: "absolute",
+          bottom: 10,
           width: 50,
           height: 50,
           backgroundColor: "green",
