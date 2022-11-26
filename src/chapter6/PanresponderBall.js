@@ -8,9 +8,7 @@ export default function PanresponderBall() {
     onMoveShouldSetPanResponder: (evt, gestureState) => true,
     onPanResponderMove: Animated.event(
       [null, { dx: panAnim.x, dy: panAnim.y }],
-      {
-        useNativeDriver: false,
-      },
+      { useNativeDriver: false },
     ),
 
     // 터치 이벤트가 끝났을 떄

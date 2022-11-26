@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import {
   View,
   Text,
@@ -7,70 +7,68 @@ import {
   Animated,
   TouchableWithoutFeedback,
   Dimensions,
-} from "react-native";
-const BANNER_HEIGHT = 200;
-const WIDTH = Dimensions.get("window").width;
+} from 'react-native'
+const WIDTH = Dimensions.get('window').width
 
 export default function PanresponderBannerSlider() {
-  const pendingRef = useRef(true);
-  const bannerAnim = useRef(new Animated.Value(0)).current;
-  const [focused, setFocused] = useState(0);
-  let focusedRef = 0;
+  const pendingRef = useRef(true)
+  const bannerAnim = useRef(new Animated.Value(0)).current
+  const [focused, setFocused] = useState(0)
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (e, gestureState) => {
-      const onRight = gestureState.dx < -80;
-      const onLeft = gestureState.dx > 80;
+      const onRight = gestureState.dx < -80
+      const onLeft = gestureState.dx > 80
+      const pending = pendingRef.current
 
-      if (onRight && focused < 3 && pendingRef.current) {
-        pendingRef.current = false;
-        setFocused((value) => value + 1);
-        focusedRef = focusedRef + 1;
+      if (onRight && focused < 3 && pending) {
+        pending = false
+        setFocused(focused + 1)
         Animated.timing(bannerAnim, {
           toValue: -(focused + 1) * WIDTH,
           duration: 400,
           useNativeDriver: false,
         }).start(({ finished }) => {
           if (finished) {
-            pendingRef.current = true;
+            pending = true
           }
-        });
+        })
       }
-      if (onLeft && 0 < focused && pendingRef.current) {
-        pendingRef.current = false;
-        setFocused((value) => value - 1);
-        focusedRef = focusedRef - 1;
+
+      if (onLeft && 0 < focused && pending) {
+        pending = false
+        setFocused(focused - 1)
+
         Animated.timing(bannerAnim, {
           toValue: -(focused - 1) * WIDTH,
           duration: 400,
           useNativeDriver: false,
         }).start(({ finished }) => {
           if (finished) {
-            pendingRef.current = true;
+            pending = true
           }
-        });
+        })
       }
     },
-  });
+  })
 
   const onButtonPress = (index) => {
-    clearInterval(intervalSlider);
     if (index > 3) {
-      setFocused(0);
+      setFocused(0)
     } else {
-      setFocused(index);
-      focusedRef = index;
+      setFocused(index)
+      focusedRef = index
       Animated.timing(bannerAnim, {
         toValue: -index * WIDTH,
         duration: 400,
         useNativeDriver: false,
-      }).start();
+      }).start()
     }
-  };
+  }
 
   return (
-    <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
+    <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
       <Animated.View
         {...panResponder.panHandlers}
         style={{
@@ -79,10 +77,10 @@ export default function PanresponderBannerSlider() {
       >
         <View
           style={{
-            position: "absolute",
+            position: 'absolute',
             left: 0,
             width: 3 * WIDTH,
-            flexDirection: "row",
+            flexDirection: 'row',
           }}
         >
           {[...Array(4)].map((value, index) => {
@@ -92,24 +90,24 @@ export default function PanresponderBannerSlider() {
                 style={{
                   height: WIDTH,
                   width: WIDTH,
-                  backgroundColor: "#222",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  backgroundColor: '#222',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
               >
                 <Text
-                  style={{ fontSize: 50, color: "#ffffff30", fontWeight: 100 }}
+                  style={{ fontSize: 50, color: '#ffffff30', fontWeight: 100 }}
                 >
                   {index}
                 </Text>
               </View>
-            );
+            )
           })}
         </View>
       </Animated.View>
       <Buttons onButtonPress={onButtonPress} focused={focused} />
     </SafeAreaView>
-  );
+  )
 }
 
 function Buttons({ onButtonPress, focused }) {
@@ -117,8 +115,8 @@ function Buttons({ onButtonPress, focused }) {
     <View
       style={{
         marginTop: WIDTH + 10,
-        justifyContent: "center",
-        flexDirection: "row",
+        justifyContent: 'center',
+        flexDirection: 'row',
       }}
     >
       {[...Array(4)].map((value, index) => {
@@ -131,14 +129,14 @@ function Buttons({ onButtonPress, focused }) {
               style={{
                 width: 10,
                 height: 10,
-                backgroundColor: focused === index ? "#222" : "#ddd",
+                backgroundColor: focused === index ? '#222' : '#ddd',
                 borderRadius: 15,
                 marginHorizontal: 6,
               }}
             />
           </TouchableWithoutFeedback>
-        );
+        )
       })}
     </View>
-  );
+  )
 }

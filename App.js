@@ -22,26 +22,28 @@ import ProgressbarAnimation from './src/chapter3/ProgressbarAnimation'
 import Skeleton from './src/chapter3/Skeleton'
 import SnowBackground from './src/chapter3/SnowBackground'
 
-import LayoutAnimationIntro from './src/chapter4/LayoutAnimationIntro'
-import LayoutAnimationPageHeader from './src/chapter4/LayoutAnimationPageHeader'
-import LayoutAnimationCollapse from './src/chapter4/LayoutAnimationCollapse'
+// import LayoutAnimationIntro from './src/chapter4/LayoutAnimationIntro'
+// import LayoutAnimationPageHeader from './src/chapter4/LayoutAnimationPageHeader'
+// import LayoutAnimationCollapse from './src/chapter4/LayoutAnimationCollapse'
 
-import InteractionManagerIntro from './src/chapter5/InteractionManagerBasic'
+// import InteractionManagerIntro from './src/chapter5/InteractionManagerBasic'
 
-import PanresponderIntro from './src/chapter6/PanresponderIntro'
-// import PanresponderBasic from "./src/chapter6/PanresponderBasic";
-import PanresponderBall from './src/chapter6/PanresponderBall'
-// ! animted.addListener  로 데이터를 확인할 수 있을 것!
-// import PanresponderBox from "./src/chapter6/PanresponderBox";
-import PanresponderModalView from './src/chapter6/PanresponderModalView'
-import PanresponderModalAnimation from './src/chapter6/PanresponderModalAnimation'
-import PanresponderBannerSlider from './src/chapter6/PanresponderBannerSlider'
-import PanresponderFontSlider from './src/chapter6/PanresponderFontSlider'
+// import PanresponderIntro from './src/chapter6/PanresponderIntro'
+// // import PanresponderBasic from "./src/chapter6/PanresponderBasic";
+// import PanresponderBall from './src/chapter6/PanresponderBall'
+// // ! animted.addListener  로 데이터를 확인할 수 있을 것!
+// // import PanresponderBox from "./src/chapter6/PanresponderBox";
+// import PanresponderModalView from './src/chapter6/PanresponderModalView'
+// import PanresponderModalAnimation from './src/chapter6/PanresponderModalAnimation'
+// import PanresponderBannerSlider from './src/chapter6/PanresponderBannerSlider'
+// import PanresponderFontSlider from './src/chapter6/PanresponderFontSlider'
+
+import ViewLayoutEvent from './src/chapter7/ViewLayoutEvent'
 
 const App = () => {
   return (
     <View style={styles.wrapper}>
-      <PanresponderBall />
+      <ViewLayoutEvent />
     </View>
   )
 }
