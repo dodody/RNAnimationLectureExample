@@ -28,14 +28,20 @@ import LayoutAnimationCollapse from "./src/chapter4/LayoutAnimationCollapse";
 
 import InteractionManagerIntro from "./src/chapter5/InteractionManagerBasic";
 
-import PanresponderBasic from "./src/chapter6/PanresponderBasic";
+import PanresponderIntro from "./src/chapter6/PanresponderIntro";
+// import PanresponderBasic from "./src/chapter6/PanresponderBasic";
 import PanresponderBall from "./src/chapter6/PanresponderBall";
-import PanresponderBox from "./src/chapter6/PanresponderBox";
+// ! animted.addListener  로 데이터를 확인할 수 있을 것!
+// import PanresponderBox from "./src/chapter6/PanresponderBox";
+import PanresponderModalView from "./src/chapter6/PanresponderModalView";
+import PanresponderModalAnimation from "./src/chapter6/PanresponderModalAnimation";
+import PanresponderBannerSlider from "./src/chapter6/PanresponderBannerSlider";
+import PanresponderFontSlider from "./src/chapter6/PanresponderFontSlider";
 
 const App = () => {
   return (
     <View style={styles.wrapper}>
-      <PanresponderBall />
+      <PanresponderIntro />
     </View>
   );
 };
