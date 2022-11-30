@@ -2,7 +2,7 @@
   "workbench.colorTheme": "Default Dark+",
   "files.autoSave": "onFocusChange",
   "editor.formatOnSave": true,
-  "editor.fontSize": 10,
+  "editor.fontSize": 11,
   "editor.codeActionsOnSave": {},
   "editor.columnSelection": false
 }

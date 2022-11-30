@@ -7,6 +7,7 @@ export default function FlatlistCheckRenderList() {
   const onViewableItemsChanged = ({ viewableItems }) => {
     // 1)
     // ? 현재 디바이스 화면에 띄어져있는 화면이 보여집니다.
+
     // console.log(viewableItems);
     // 어떤식으로 생겼다.
 
