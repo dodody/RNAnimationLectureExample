@@ -26,14 +26,18 @@ export default function YoutubeMusic() {
         <ScrollView
           scrollEventThrottle={1}
           style={{ flex: 1 }}
-          // scrollEnabled={true}
-          // nestedScrollEnabled={true}
+          scrollEnabled={true}
+          nestedScrollEnabled={true}
           onScroll={onScroll}
           onScrollBeginDrag={onScrollBeginDrag}
           onScrollEndDrag={onScrollEndDrag}
         >
           <View style={{ height: 10000 }}>
             <MusicListSmall />
+            <MusicListMedium />
+            <MusicListLarge />
+            <MusicListSmall />
+            <MusicListMedium />
             <MusicListMedium />
             <MusicListLarge />
           </View>

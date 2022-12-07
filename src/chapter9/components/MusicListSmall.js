@@ -14,15 +14,6 @@ const { width, height } = Dimensions.get("window");
 
 export default function MusicListSmall() {
   const moveAnim = useRef(new Animated.Value(0)).current;
-  const panResponder = useRef(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderMove: (evt, gestureState) => {
-        console.log(111);
-        moveAnim.setValue(gestureState.dx);
-      },
-    })
-  ).current;
 
   return (
     <View style={{ marginVertical: 20 }}>
@@ -40,7 +31,6 @@ export default function MusicListSmall() {
           >
             {[...Array(3)].map((value, index) => (
               <Animated.View
-                // {...panResponder.panHandlers}
                 key={index}
                 style={{
                   marginTop: 14,
@@ -109,7 +99,7 @@ function SmallMusicItem() {
               fontWeight: "bold",
             }}
           >
-            {faker.music.songName()} {faker.music.songName()}
+            {faker.music.songName()}
           </Text>
         </View>
       </View>
