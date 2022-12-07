@@ -5,7 +5,7 @@ const { height, width } = Dimensions.get("window");
 
 // anim 1) 위로 올라가는 애니메이션
 // anim 2) 점점 짙어지는 애니메이션
-export default function HeaderBackground({ focus, headerBgAnim }) {
+export default function HeaderBackground({ focus }) {
   return (
     <View>
       {/* 배경 */}
@@ -14,10 +14,7 @@ export default function HeaderBackground({ focus, headerBgAnim }) {
           width: "100%",
           height: 300,
           position: "absolute",
-          top: headerBgAnim.interpolate({
-            inputRange: [0, 40],
-            outputRange: [0, -20], // 올라가는게 티가 나게
-          }),
+          top: -20,
         }}
       >
         {focus === undefined ? (
@@ -31,11 +28,7 @@ export default function HeaderBackground({ focus, headerBgAnim }) {
             width: "100%",
             height: 300,
             position: "absolute",
-            // header에 맞춰서 페이드아웃 되는 것처럼 보이게 하려고
-            backgroundColor: headerBgAnim.interpolate({
-              inputRange: [0, 100],
-              outputRange: ["#11111110", "#111"],
-            }),
+            backgroundColor: "#11111110", // header에 맞춰서 페이드아웃 되는 것처럼 보이게 하려고
           }}
         />
       </Animated.View>
@@ -76,7 +69,13 @@ function ImageBackground({ focus }) {
     <>
       <Image
         source={{ uri: `https://picsum.photos/30${focus}` }}
-        style={{ width: "100%", height: 300, position: "absolute" }}
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: width,
+          marginTop: -100,
+          zIndex: -10,
+        }}
       />
       <LinearGradient
         start={{ x: 0.5, y: 0.1 }}

@@ -1,27 +1,16 @@
-import { Animated, Image, SafeAreaView, StyleSheet, View } from "react-native";
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from "react-native-iphone-x-helper";
-
-import Icon from "react-native-vector-icons/MaterialIcons";
 import React from "react";
+import { Animated, Image, SafeAreaView, StyleSheet, View } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
-export default function Header({ headerHeight, headerAnim }) {
+export default function Header() {
   return (
     <SafeAreaView>
       <Animated.View
         style={[
           styles.wrapper,
           {
-            opacity: headerAnim.interpolate({
-              inputRange: [0, 100],
-              outputRange: [1, 0],
-            }),
-            marginTop: headerAnim.interpolate({
-              inputRange: [0, 100],
-              outputRange: [0, -100],
-            }),
+            opacity: 1,
+            marginTop: 0,
           },
         ]}
       >
@@ -53,6 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 10,
+    zIndex: 10,
   },
   iconWrapper: {
     height: 40,

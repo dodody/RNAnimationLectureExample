@@ -10,25 +10,24 @@ export default function Bottom({ BOTTOM_HEIGHT }) {
         flexDirection: "row",
         backgroundColor: "#222222",
         paddingVertical: 6,
+        paddingBottom: getBottomSpace(),
         height: BOTTOM_HEIGHT,
       }}
     >
-      <View style={{ alignItems: "center", flex: 1 }}>
-        <Icon name="home-filled" size={20} color="white" />
-        <Text style={{ color: "white", marginTop: 6, fontSize: 12 }}>홈</Text>
-      </View>
-      <View style={{ alignItems: "center", flex: 1 }}>
-        <Icon name="explore" size={20} color="white" />
-        <Text style={{ color: "white", marginTop: 6, fontSize: 12 }}>
-          둘러보기
-        </Text>
-      </View>
-      <View style={{ alignItems: "center", flex: 1 }}>
-        <Icon name="library-music" size={20} color="white" />
-        <Text style={{ color: "white", marginTop: 6, fontSize: 12 }}>
-          보관함
-        </Text>
-      </View>
+      <ButtomItem title="홈" icon="home-filled" />
+      <ButtomItem title="둘러보기" icon="explore" />
+      <ButtomItem title="보관함" icon="library-music" />
+    </View>
+  );
+}
+
+function ButtomItem({ title, icon }) {
+  return (
+    <View style={{ alignItems: "center", flex: 1 }}>
+      <Icon name={icon} size={20} color="white" />
+      <Text style={{ color: "white", marginTop: 6, fontSize: 12 }}>
+        {title}
+      </Text>
     </View>
   );
 }
