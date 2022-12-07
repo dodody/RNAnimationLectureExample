@@ -18,6 +18,7 @@ export default function YoutubeMusic() {
   return (
     <>
       <StatusBar barStyle={"light-content"} />
+
       <View style={{ flex: 1, backgroundColor: "#111" }}>
         <HeaderBackground focus={focus} />
         <HeaderLogo />
