@@ -2,11 +2,13 @@ import { useRef } from "react";
 import { Animated, Dimensions } from "react-native";
 
 export default function useYoutubeMusicScroll() {
+  const beginDragRef = useRef(0); // 드래그 시작한 시점
   // 스크롤 값에 따른 애니메이션
   const headerAnim = useRef(new Animated.Value(0)).current;
   const headerBgAnim = useRef(new Animated.Value(0)).current;
 
   const onScrollBeginDrag = (e) => {
+    beginDragRef.current = e.nativeEvent.contentOffset.y;
     console.log("onScrollBeginDrag");
   };
   const onScroll = (e) => {
