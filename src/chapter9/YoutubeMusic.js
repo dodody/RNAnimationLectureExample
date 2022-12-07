@@ -39,7 +39,6 @@ export default function YoutubeMusic() {
             <Text style={{ padding: 20, color: "white" }}>hello</Text>
             <Text style={{ padding: 20, color: "white" }}>hello</Text>
             <Text style={{ padding: 20, color: "white" }}>hello</Text>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
           </View>
         </ScrollView>
         <View>
