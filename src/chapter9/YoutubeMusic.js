@@ -6,6 +6,10 @@ import HeaderLogo from "./components/HeaderLogo";
 import HeaderCategory from "./components/HeaderCategory";
 import useYoutubeMusicScroll from "./YoutubeMusicScroll.hooks";
 
+import MusicListSmall from "./components/MusicListSmall";
+import MusicListMedium from "./components/MusicListMedium";
+import MusicListLarge from "./components/MusicListLarge";
+
 export default function YoutubeMusic() {
   const [focus, setFocus] = useState(undefined);
   const { onScroll, onScrollBeginDrag, onScrollEndDrag } =
@@ -29,17 +33,9 @@ export default function YoutubeMusic() {
           onScrollEndDrag={onScrollEndDrag}
         >
           <View style={{ height: 10000 }}>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
-            <Text style={{ padding: 20, color: "white" }}>hello</Text>
+            <MusicListSmall />
+            <MusicListMedium />
+            <MusicListLarge />
           </View>
         </ScrollView>
         <View>
