@@ -7,9 +7,14 @@ import {
   Animated,
 } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
-import { CATEGORY } from "../utils";
+import { CATEGORY, CATEGORY_HEADER_HEIGHT, LOGO_HEADER_HEIGHT } from "../utils";
 
-export default function HeaderCategory({ focus, setFocus }) {
+export default function HeaderCategory({
+  focus,
+  setFocus,
+  headerAnim,
+  headerBgAnim,
+}) {
   const onPress = (index) => {
     const Focus = focus === index ? undefined : index;
     setFocus(Focus);
@@ -20,12 +25,21 @@ export default function HeaderCategory({ focus, setFocus }) {
       <Animated.View
         style={[
           {
+            height: CATEGORY_HEADER_HEIGHT,
             borderBottomWidth: 0.5,
-            borderBottomColor: "#ddd",
+            borderBottomColor: headerBgAnim.interpolate({
+              inputRange: [0, 70],
+              outputRange: ["#dddddd00", "#ddd"],
+            }),
             paddingTop: getStatusBarHeight() + 10,
             paddingBottom: 10,
             paddingHorizontal: 10,
             paddingTop: 10,
+            backgroundColor: headerBgAnim.interpolate({
+              inputRange: [0, 70],
+              outputRange: ["#11111100", "#111"],
+            }),
+            zIndex: 1,
           },
         ]}
       >
