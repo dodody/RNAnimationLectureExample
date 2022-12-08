@@ -45,7 +45,7 @@ export default function YoutubeMusic() {
             paddingTop: CATEGORY_HEADER_HEIGHT,
           }}
           scrollEnabled={true}
-          nestedScrollEnabled={true}
+          nestedScrollEnabled={false}
           onScroll={onScroll}
           onScrollBeginDrag={onScrollBeginDrag}
           onScrollEndDrag={onScrollEndDrag}

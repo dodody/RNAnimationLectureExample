@@ -23,13 +23,17 @@ export default function useYoutubeMusicScroll() {
 
     // header animation
     // logo header : 움직이는 만큼 위로 올라가게 할 것.
+
+    // ! 바운싱이 되는 타이밍은~~~~
+    // ! 가로 스크롤이 있을 떄 nestedScrollEnabled={false}
+
     if (
       0 < dy &&
       dy < LOGO_HEADER_HEIGHT &&
       headerStatusRef.current === "show"
     ) {
-      // ! dy가 양수일 때 위로 올라감
       headerAnim.setValue(dy);
+      // ! dy가 양수일 때 위로 올라감
     }
     if (
       -LOGO_HEADER_HEIGHT < dy &&
