@@ -33,7 +33,6 @@ export default function YoutubeMusic() {
         <HeaderCategory
           focus={focus}
           setFocus={setFocus}
-          headerAnim={headerAnim}
           headerBgAnim={headerBgAnim}
         />
 

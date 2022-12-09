@@ -9,12 +9,7 @@ import {
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { CATEGORY, CATEGORY_HEADER_HEIGHT, LOGO_HEADER_HEIGHT } from "../utils";
 
-export default function HeaderCategory({
-  focus,
-  setFocus,
-  headerAnim,
-  headerBgAnim,
-}) {
+export default function HeaderCategory({ focus, setFocus, headerBgAnim }) {
   const onPress = (index) => {
     const Focus = focus === index ? undefined : index;
     setFocus(Focus);

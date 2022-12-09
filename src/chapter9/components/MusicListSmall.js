@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import {
   View,
   Text,
-  PanResponder,
   Image,
   Animated,
   ScrollView,
@@ -13,16 +12,69 @@ import Icon from "react-native-vector-icons/Entypo";
 const { width, height } = Dimensions.get("window");
 
 export default function MusicListSmall() {
+  const beginDragRef = useRef(0);
+  const pageRef = useRef(0);
+  const scrollViewRef = useRef(0);
   const moveAnim = useRef(new Animated.Value(0)).current;
+
+  const onScrollBeginDrag = (e) => {
+    beginDragRef.current = e.nativeEvent.contentOffset.x;
+  };
+
+  const onScrollEndDrag = (e) => {
+    const x = e.nativeEvent.contentOffset.x;
+    const dx = x - beginDragRef.current;
+    const WIDTH = width - 40;
+
+    // ! 예상한 정도의 스크롤이 없었을 경우 기본으로 돌아가게 하는 로직
+    // 다음 페이지로 안넘어감
+    if (dx < WIDTH / 4) {
+      console.log(2, WIDTH * pageRef.current + 1);
+      scrollViewRef.current.scrollTo({
+        x: WIDTH * pageRef.current,
+        y: 0,
+        animated: true,
+      });
+    }
+
+    // ! 1/4을 드래그 했을 떄 로직, 로직의 효용성이 더 높아야 한다.
+    // 2 page 이상을 할 때,
+    // 다음 페이지로 넘어감
+    if (dx > WIDTH / 4) {
+      console.log(2, WIDTH * pageRef.current + 1);
+      scrollViewRef.current.scrollTo({
+        x: WIDTH * (pageRef.current + 1),
+        y: 0,
+        animated: true,
+      });
+      pageRef.current = pageRef.current + 1;
+    }
+
+    // ! dx가 음수일 때 작동하는 함수
+    // 이전 페이지로 넘어감
+    if (dx < 0 && dx > -WIDTH / 2) {
+      console.log(3);
+      scrollViewRef.current.scrollTo({
+        x: WIDTH * (pageRef.current - 1),
+        y: 0,
+        animated: true,
+      });
+      pageRef.current = pageRef.current - 1;
+    }
+  };
 
   return (
     <View style={{ marginVertical: 20 }}>
       <View>
         <Title />
         <Animated.View style={{ flexDirection: "row" }}>
+          {/* // ! rn 공식문서 보면서 필요한것들 찾으면서 해야한다. */}
           <ScrollView
-            nestedScrollEnabled={true}
+            ref={scrollViewRef}
             horizontal={true}
+            scrollEventThrottle={1}
+            onScrollBeginDrag={onScrollBeginDrag}
+            onScrollEndDrag={onScrollEndDrag}
             style={{
               width: width * 3 + 40,
               paddingHorizontal: 20,
