@@ -1,13 +1,5 @@
 import React, { useRef } from "react";
-import {
-  View,
-  Text,
-  PanResponder,
-  Image,
-  Animated,
-  ScrollView,
-  Dimensions,
-} from "react-native";
+import { View, Text, Image, ScrollView, Dimensions } from "react-native";
 import { faker } from "@faker-js/faker";
 import Icon from "react-native-vector-icons/Entypo";
 const { width, height } = Dimensions.get("window");

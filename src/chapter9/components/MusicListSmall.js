@@ -21,6 +21,9 @@ export default function MusicListSmall() {
     beginDragRef.current = e.nativeEvent.contentOffset.x;
   };
 
+  // !  스크롤의 정도를 읽고 행동시키기
+  // !드래그의 양이 중요한게 아니라, 스크롤의 양이 중요하기 때문에,
+
   const onScrollEndDrag = (e) => {
     const x = e.nativeEvent.contentOffset.x;
     const dx = x - beginDragRef.current;

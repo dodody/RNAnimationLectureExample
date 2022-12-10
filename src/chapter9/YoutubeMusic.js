@@ -9,6 +9,7 @@ import useYoutubeMusicScroll from "./YoutubeMusicScroll.hooks";
 import MusicListSmall from "./components/MusicListSmall";
 import MusicListMedium from "./components/MusicListMedium";
 import MusicListLarge from "./components/MusicListLarge";
+import PlayList from "./components/PlayList";
 import { CATEGORY_HEADER_HEIGHT } from "./utils";
 
 export default function YoutubeMusic() {
@@ -60,6 +61,7 @@ export default function YoutubeMusic() {
           </View>
         </ScrollView>
         <View>
+          <PlayList />
           <Bottom />
         </View>
       </View>
