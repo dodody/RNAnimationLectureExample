@@ -60,7 +60,8 @@ export default function YoutubeMusic() {
             <MusicListLarge />
           </View>
         </ScrollView>
-        <View>
+        <View style={{ zIndex: 2 }}>
+          {/* android에서도 잘 작동 하는지 확인하기\ */}
           <PlayList />
           <Bottom />
         </View>
