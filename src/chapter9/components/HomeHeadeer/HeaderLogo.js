@@ -2,7 +2,7 @@ import React from "react";
 import { Animated, Image, SafeAreaView, StyleSheet, View } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { LOGO_HEADER_HEIGHT } from "../utils";
+import { LOGO_HEADER_HEIGHT } from "../../utils";
 
 export default function Header({ headerAnim, headerBgAnim }) {
   return (
@@ -31,7 +31,7 @@ export default function Header({ headerAnim, headerBgAnim }) {
       >
         <Image
           style={{ width: 90, height: 30 }}
-          source={require("../../asset/chapter9/logo1.png")}
+          source={require("../../../asset/chapter9/logo1.png")}
         />
         <View style={{ flexDirection: "row" }}>
           <View style={styles.iconWrapper}>

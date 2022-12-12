@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-export default function PlaylistActionBar() {
+export default function PlayListActionBar() {
   return (
     <>
       <View

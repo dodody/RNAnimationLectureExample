@@ -6,12 +6,13 @@ import {
   Animated,
   ScrollView,
   Dimensions,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { faker } from "@faker-js/faker";
 import Icon from "react-native-vector-icons/Entypo";
 const { width, height } = Dimensions.get("window");
 
-export default function MusicListSmall() {
+export default function MusicListSmall({ play, setPlay }) {
   const beginDragRef = useRef(0);
   const pageRef = useRef(0);
   const scrollViewRef = useRef(0);
@@ -95,15 +96,17 @@ export default function MusicListSmall() {
                 }}
               >
                 {[...Array(4)].map((value, index) => (
-                  <View
-                    key={index}
-                    style={{
-                      justifyContent: "space-between",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <SmallMusicItem />
-                  </View>
+                  <TouchableWithoutFeedback onPress={() => setPlay(true)}>
+                    <View
+                      key={index}
+                      style={{
+                        justifyContent: "space-between",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <SmallMusicItem />
+                    </View>
+                  </TouchableWithoutFeedback>
                 ))}
               </Animated.View>
             ))}

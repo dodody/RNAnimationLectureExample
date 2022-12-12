@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { View, ScrollView, StatusBar, Text } from "react-native";
-import Bottom from "./components/Bottom";
-import HeaderBackground from "./components/HeaderBackground";
-import HeaderLogo from "./components/HeaderLogo";
-import HeaderCategory from "./components/HeaderCategory";
+
+import HeaderBackground from "./components/HomeHeadeer/HeaderBackground";
+import HeaderLogo from "./components/HomeHeadeer/HeaderLogo";
+import HeaderCategory from "./components/HomeHeadeer/HeaderCategory";
 import useYoutubeMusicScroll from "./YoutubeMusicScroll.hooks";
 
-import MusicListSmall from "./components/MusicListSmall";
-import MusicListMedium from "./components/MusicListMedium";
-import MusicListLarge from "./components/MusicListLarge";
+import MusicListSmall from "./components/MusicList/MusicListSmall";
+import MusicListMedium from "./components/MusicList/MusicListMedium";
+import MusicListLarge from "./components/MusicList/MusicListLarge";
 import PlayList from "./components/PlayList";
 import { CATEGORY_HEADER_HEIGHT } from "./utils";
 
 export default function YoutubeMusic() {
   const [focus, setFocus] = useState(undefined);
+  const [play, setPlay] = useState(false);
   const {
     headerBgAnim,
     headerAnim,
@@ -51,19 +52,18 @@ export default function YoutubeMusic() {
           onScrollEndDrag={onScrollEndDrag}
         >
           <View style={{ height: 10000 }}>
-            <MusicListSmall />
-            <MusicListMedium />
-            <MusicListLarge />
-            <MusicListSmall />
-            <MusicListMedium />
-            <MusicListMedium />
-            <MusicListLarge />
+            <MusicListSmall play={play} setPlay={setPlay} />
+            <MusicListMedium play={play} setPlay={setPlay} />
+            <MusicListLarge play={play} setPlay={setPlay} />
+            <MusicListSmall play={play} setPlay={setPlay} />
+            <MusicListMedium play={play} setPlay={setPlay} />
+            <MusicListMedium play={play} setPlay={setPlay} />
+            <MusicListLarge play={play} setPlay={setPlay} />
           </View>
         </ScrollView>
         <View style={{ zIndex: 2 }}>
           {/* android에서도 잘 작동 하는지 확인하기\ */}
-          <PlayList />
-          <Bottom />
+          <PlayList play={play} setPlay={setPlay} />
         </View>
       </View>
     </>

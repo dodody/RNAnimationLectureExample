@@ -2,17 +2,16 @@ import React, { useRef } from "react";
 import {
   View,
   Text,
-  PanResponder,
   Image,
-  Animated,
   ScrollView,
   Dimensions,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { faker } from "@faker-js/faker";
 import Icon from "react-native-vector-icons/Entypo";
 const { width, height } = Dimensions.get("window");
 
-export default function MusicListMedium() {
+export default function MusicListLarge({ play, setPlay }) {
   return (
     <View style={{ marginVertical: 20 }}>
       {/* title */}
@@ -26,7 +25,7 @@ export default function MusicListMedium() {
         }}
       >
         <Text style={{ color: "white", fontWeight: "bold", fontSize: 24 }}>
-          다시 듣기
+          맞춤 믹스
         </Text>
         <View
           style={{
@@ -46,35 +45,34 @@ export default function MusicListMedium() {
       <ScrollView
         showsHorizontalScrollIndicator={false}
         horizontal={true}
-        style={{ height: 300, paddingLeft: 20 }}
+        style={{ paddingLeft: 20 }}
       >
         {[...Array(10)].map((value, index) => (
-          <View key={index}>
-            <MediumMusicItem />
-            <MediumMusicItem />
-          </View>
+          <TouchableWithoutFeedback key={index} onPress={() => setPlay(true)}>
+            <LargeMusicItem />
+          </TouchableWithoutFeedback>
         ))}
       </ScrollView>
     </View>
   );
 }
 
-function MediumMusicItem() {
+function LargeMusicItem() {
   return (
-    <View style={{ marginRight: 20 }}>
+    <View style={{ marginRight: 10 }}>
       <Image
         source={{ uri: "https://picsum.photos/100" }}
-        style={{ width: width / 4, height: width / 4, borderRadius: 4 }}
+        style={{ width: width / 3, height: width / 3, borderRadius: 4 }}
       />
       <Text
         numberOfLines={2}
         style={{
-          marginTop: 5,
+          marginTop: 8,
           color: "white",
-          fontSize: 10,
+          fontSize: 12,
           height: 40,
           fontWeight: "bold",
-          width: width / 4,
+          width: width / 3,
         }}
       >
         {faker.music.songName()}

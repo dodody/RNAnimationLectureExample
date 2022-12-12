@@ -1,12 +1,14 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Animated } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { getBottomSpace } from "react-native-iphone-x-helper";
+import { BOTTOM_HEIGHT } from "../../utils";
 
-export default function Bottom({ BOTTOM_HEIGHT }) {
+export default function Bottom({ heightAnim }) {
   return (
-    <View
+    <Animated.View
       style={{
+        transform: [{ translateY: heightAnim }],
         paddingBottom: getBottomSpace(),
         backgroundColor: "#222222",
       }}
@@ -14,7 +16,7 @@ export default function Bottom({ BOTTOM_HEIGHT }) {
       <View
         style={{
           flexDirection: "row",
-          height: 50,
+          height: BOTTOM_HEIGHT,
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -23,7 +25,7 @@ export default function Bottom({ BOTTOM_HEIGHT }) {
         <ButtomItem title="둘러보기" icon="explore" />
         <ButtomItem title="보관함" icon="library-music" />
       </View>
-    </View>
+    </Animated.View>
   );
 }
 

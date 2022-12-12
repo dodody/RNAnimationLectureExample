@@ -1,10 +1,19 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Animated, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
-export default function PlayListMiniButtons({ play }) {
+const { width, height } = Dimensions.get("window");
+export default function PlayListMiniButtons({ play, heightAnim }) {
   return (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
+    <Animated.View
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        opacity: heightAnim.interpolate({
+          inputRange: [0, height / 2],
+          outputRange: [1, 0],
+        }),
+      }}
+    >
       {play ? (
         <View
           style={{
@@ -38,6 +47,6 @@ export default function PlayListMiniButtons({ play }) {
       >
         <Icon name="skip-next" color="white" size={24} />
       </View>
-    </View>
+    </Animated.View>
   );
 }
