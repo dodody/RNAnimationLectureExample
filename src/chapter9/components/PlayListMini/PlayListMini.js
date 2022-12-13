@@ -1,18 +1,39 @@
-import React from "react";
-import { Dimensions, Text, Animated, View } from "react-native";
+import React, { useEffect } from "react";
+import {
+  Dimensions,
+  Text,
+  Animated,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { faker } from "@faker-js/faker";
 const { width, height } = Dimensions.get("window");
 
 export default function PlayListMini({ heightAnim, play }) {
+  useEffect(() => {
+    if (play) {
+      console.log(123123123);
+      Animated.timing(heightAnim, {
+        toValue: 0,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [play]);
+
   return (
-    <View
+    <Animated.View
       style={{
+        zIndex: 0,
         position: "absolute",
         left: 40 + 20,
         width: width - 40 - 20,
         justifyContent: "space-between",
         flexDirection: "row",
+        // bottom: heightAnim.interpolate({
+        //   inputRange: [-100, 0, 10],
+        //   outputRange: [-100, 0, 0],
+        // }),
       }}
     >
       {/* music title zone */}
@@ -53,39 +74,49 @@ export default function PlayListMini({ heightAnim, play }) {
         }}
       >
         {play ? (
-          <View
-            style={{
-              width: 60,
-              height: 60,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Icon name="play" color="white" size={24} />
-          </View>
+          <TouchableOpacity onPress={() => console.log(1)}>
+            <View
+              style={{
+                width: 60,
+                height: 60,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Icon name="play" color="white" size={24} />
+            </View>
+          </TouchableOpacity>
         ) : (
+          <TouchableOpacity
+            style={{ borderWidth: 1 }}
+            onPress={() => console.log(1)}
+          >
+            <View
+              style={{
+                width: 60,
+                height: 60,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Icon name="pause" color="white" size={24} />
+            </View>
+          </TouchableOpacity>
+        )}
+        <TouchableOpacity onPress={() => console.log(1234234234234)}>
           <View
             style={{
               width: 60,
               height: 60,
               justifyContent: "center",
               alignItems: "center",
+              backgroundColor: "red",
             }}
           >
-            <Icon name="pause" color="white" size={24} />
+            <Icon name="skip-next" color="white" size={24} />
           </View>
-        )}
-        <View
-          style={{
-            width: 60,
-            height: 60,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Icon name="skip-next" color="white" size={24} />
-        </View>
+        </TouchableOpacity>
       </Animated.View>
-    </View>
+    </Animated.View>
   );
 }

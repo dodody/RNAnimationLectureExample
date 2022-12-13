@@ -1,14 +1,21 @@
 import React from "react";
-import { View, Text, Animated } from "react-native";
+import { View, Text, Animated, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { getBottomSpace } from "react-native-iphone-x-helper";
 import { BOTTOM_HEIGHT } from "../../utils";
 
+const { width, height } = Dimensions.get("window");
 export default function Bottom({ heightAnim }) {
   return (
     <Animated.View
       style={{
-        transform: [{ translateY: heightAnim }],
+        zIndex: 100,
+        // full page로 가면 사라지는 로직
+        // ? 중간에 덜그덕 거리는게 거슬리면 중간에 턱을 하나 추가해준다.
+        marginBottom: heightAnim.interpolate({
+          inputRange: [0, 20, height],
+          outputRange: [0, 0, -(getBottomSpace() + 50)],
+        }),
         paddingBottom: getBottomSpace(),
         backgroundColor: "#222222",
       }}

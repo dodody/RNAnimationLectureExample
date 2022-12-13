@@ -29,7 +29,6 @@ export default function MusicListLarge({ play, setPlay }) {
         </Text>
         <View
           style={{
-            borderWidth: 1,
             padding: 2,
             paddingHorizontal: 6,
             borderColor: "#ffffff50",
@@ -48,7 +47,7 @@ export default function MusicListLarge({ play, setPlay }) {
         style={{ paddingLeft: 20 }}
       >
         {[...Array(10)].map((value, index) => (
-          <TouchableWithoutFeedback key={index} onPress={() => setPlay(true)}>
+          <TouchableWithoutFeedback key={index} onPress={setPlay}>
             <LargeMusicItem />
           </TouchableWithoutFeedback>
         ))}

@@ -96,7 +96,7 @@ export default function MusicListSmall({ play, setPlay }) {
                 }}
               >
                 {[...Array(4)].map((value, index) => (
-                  <TouchableWithoutFeedback onPress={() => setPlay(true)}>
+                  <TouchableWithoutFeedback onPress={setPlay}>
                     <View
                       key={index}
                       style={{

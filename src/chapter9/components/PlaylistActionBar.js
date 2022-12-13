@@ -6,7 +6,7 @@ export default function PlayListActionBar() {
     <>
       <View
         style={{
-          borderWidth: 0.5,
+          borderBottomWidth: 0.5,
           borderColor: "#ffffff50",
           bottom: 0,
           width: "100%",

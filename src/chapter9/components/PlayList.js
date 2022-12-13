@@ -26,22 +26,35 @@ import PlayListMini from "./PlayListMini/PlayListMini";
 import PlayListFull from "./PlayListFull/PlayListFull";
 import usePlayList from "./PlayList.hooks";
 import Bottom from "./HomeBottom/Bottom";
+const { width, height } = Dimensions.get("window");
 //  ! 다양한 트리거가 있을 수 있지만, 우리는 dx값으로 트리거를 만들어 보겠다.
 
-const { width, height } = Dimensions.get("window");
-export default function PlayList({ play, setPlay }) {
-  const { panResponder, heightAnim, typeRef } = usePlayList({ play, setPlay });
+export default function PlayList({ play, setPlay, heightAnim }) {
+  const { panResponder, handleStopAnimation } = usePlayList({
+    play,
+    setPlay,
+    heightAnim,
+  });
   const pageAnim = useRef(new Animated.Value(0)).current;
 
   return (
-    <>
+    <View
+      style={{
+        // borderWidth: 1,
+        // borderColor: "blue",
+        zIndex: 100,
+        width: width,
+        position: "absolute",
+        bottom: BOTTOM_HEIGHT + getBottomSpace(),
+      }}
+    >
       <View {...panResponder.panHandlers}>
         <Animated.View
           style={[
             {
               height: heightAnim.interpolate({
-                inputRange: [0, height],
-                outputRange: [60, height + 50 + getBottomSpace()],
+                inputRange: [-100, 0, height],
+                outputRange: [60, 60, height + 50 + getBottomSpace()],
               }),
               marginTop: heightAnim.interpolate({
                 inputRange: [0, height],
@@ -78,6 +91,7 @@ export default function PlayList({ play, setPlay }) {
           >
             <PlayListImage heightAnim={heightAnim} />
             <PlayListFull
+              handleStopAnimation={handleStopAnimation}
               heightAnim={heightAnim}
               play={play}
               setPlay={setPlay}
@@ -88,11 +102,10 @@ export default function PlayList({ play, setPlay }) {
               setPlay={setPlay}
             />
             {/* play, setPlay */}
-            <PlayListActionBar heightAnim={heightAnim} />
           </View>
+          <PlayListActionBar heightAnim={heightAnim} />
         </Animated.View>
       </View>
-      <Bottom heightAnim={heightAnim} />
-    </>
+    </View>
   );
 }

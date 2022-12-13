@@ -31,7 +31,6 @@ export default function MusicListMedium({ play, setPlay }) {
         </Text>
         <View
           style={{
-            borderWidth: 1,
             padding: 2,
             paddingHorizontal: 6,
             borderColor: "#ffffff50",
@@ -51,7 +50,7 @@ export default function MusicListMedium({ play, setPlay }) {
       >
         {[...Array(10)].map((value, index) => (
           <View key={index}>
-            <TouchableWithoutFeedback onPress={() => setPlay(true)}>
+            <TouchableWithoutFeedback onPress={setPlay}>
               <View>
                 <MediumMusicItem />
                 <MediumMusicItem />
