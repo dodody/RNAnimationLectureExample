@@ -1,94 +1,79 @@
-// ! 스크롤 관련 애니메이션은 여기에 넣어두기
-import React, { useRef, useState } from "react";
+import { useRef } from "react";
 import { Animated, Dimensions } from "react-native";
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from "react-native-iphone-x-helper";
-
-const { height, width } = Dimensions.get("window");
-const HEADER_HEIGHT = 40;
-const BOTTOM_HEIGHT = 40 + getBottomSpace();
+import { LOGO_HEADER_HEIGHT } from "./utils";
 
 export default function useYoutubeMusicScroll() {
-  const showenHeader = useRef(true);
   const beginDragRef = useRef(0); // 드래그 시작한 시점
-  const scrollAnim = useRef(new Animated.Value(0)).current;
-  const scrollValueAnim = useRef(new Animated.Value(0)).current;
-
-  const backgroundAnimPending = useRef(true).current;
-  const backgroundAnim = useRef(new Animated.Value(0)).current;
   // 스크롤 값에 따른 애니메이션
   const headerStatusRef = useRef("show");
-  const headerAnim = useRef(new Animated.Value(0)).current;
   const headerBgAnim = useRef(new Animated.Value(0)).current;
-
-  console.log(getStatusBarHeight() + 40);
+  const headerAnim = useRef(new Animated.Value(0)).current;
 
   const onScrollBeginDrag = (e) => {
     beginDragRef.current = e.nativeEvent.contentOffset.y;
   };
   const onScroll = (e) => {
-    onScrollHeader(e);
-    onScrollHeaderBg(e);
+    const y = e.nativeEvent.contentOffset.y;
+    const dy = e.nativeEvent.contentOffset.y - beginDragRef.current;
+
+    // header background animation
+    if (0 < y && y < 300) {
+      headerBgAnim.setValue(y);
+    }
+
+    // header animation
+    // logo header : 움직이는 만큼 위로 올라가게 할 것.
+
+    // ! 바운싱이 되는 타이밍은~~~~
+    // ! 가로 스크롤이 있을 떄 nestedScrollEnabled={false}
+
+    if (
+      0 < dy &&
+      dy < LOGO_HEADER_HEIGHT &&
+      headerStatusRef.current === "show"
+    ) {
+      headerAnim.setValue(dy);
+      // ! dy가 양수일 때 위로 올라감
+    }
+    if (
+      -LOGO_HEADER_HEIGHT < dy &&
+      dy < 0 &&
+      headerStatusRef.current === "hide"
+    ) {
+      // ! dy가 음수일 때 아래로 내려감
+      headerAnim.setValue(LOGO_HEADER_HEIGHT + dy);
+    }
   };
 
   const onScrollEndDrag = (e) => {
-    onScrollEndDragHeader(e);
-  };
-
-  // 배경 애니메이션
-  const onScrollHeaderBg = (e) => {
-    const y = e.nativeEvent.contentOffset.y;
-    if (y > 0) {
-      headerBgAnim.setValue(y);
-    }
-  };
-
-  // header animation
-  const hehehgiht = getStatusBarHeight() + 40 + 20;
-  // ! 스크롤로 직접 올려보고, 맞는 위치 정해보기
-  const onScrollHeader = (e) => {
     const dy = e.nativeEvent.contentOffset.y - beginDragRef.current;
-    console.log(dy);
-    // to the show
-    // ? 보여지게 하는 애니메이션은 조금 더 섬세한 핸들링이 필요하다.
-    if (dy < 0 && dy > -hehehgiht && headerStatusRef.current === "hide") {
-      headerAnim.setValue(dy + hehehgiht);
-    }
-    // to the hide
-    if (dy > 0 && headerStatusRef.current === "show") {
-      headerAnim.setValue(dy);
-    }
-  };
 
-  const onScrollEndDragHeader = (e) => {
-    const dy = e.nativeEvent.contentOffset.y - beginDragRef.current;
-    if (dy < 0) {
+    // header animation
+    // logo header : 움직이는 만큼 위로 올라가게 할 것.
+    if (LOGO_HEADER_HEIGHT / 2 < dy) {
+      // ! 높이의 반보다 많이 움직였으면 위로 붙어야 한다.
       Animated.timing(headerAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
-      headerStatusRef.current = "show";
-    }
-    if (dy > 0) {
-      Animated.timing(headerAnim, {
-        toValue: hehehgiht,
-        duration: 300,
+        toValue: LOGO_HEADER_HEIGHT,
+        duration: 200,
         useNativeDriver: false,
       }).start();
       headerStatusRef.current = "hide";
     }
+    if (LOGO_HEADER_HEIGHT / 2 > dy) {
+      // ! 높이의 반보다 덜 움직였으면 원래 자리로 붙어야 한다
+      // 위로 올라가게 붙게
+      Animated.timing(headerAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: false,
+      }).start();
+      headerStatusRef.current = "show";
+    }
   };
 
   return {
-    scrollValueAnim,
-    backgroundAnim,
-    showenHeader,
-    headerAnim,
-    scrollAnim,
     headerBgAnim,
+    headerAnim,
     onScroll,
     onScrollBeginDrag,
     onScrollEndDrag,

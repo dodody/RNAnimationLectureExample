@@ -15,9 +15,10 @@ export default function HeaderBackground({ focus, headerBgAnim }) {
           height: 300,
           position: "absolute",
           top: headerBgAnim.interpolate({
-            inputRange: [0, 40],
-            outputRange: [0, -20], // 올라가는게 티가 나게
+            inputRange: [0, 300],
+            outputRange: [-20, -100],
           }),
+          // -20,
         }}
       >
         {focus === undefined ? (
@@ -31,11 +32,11 @@ export default function HeaderBackground({ focus, headerBgAnim }) {
             width: "100%",
             height: 300,
             position: "absolute",
-            // header에 맞춰서 페이드아웃 되는 것처럼 보이게 하려고
             backgroundColor: headerBgAnim.interpolate({
-              inputRange: [0, 100],
-              outputRange: ["#11111110", "#111"],
+              inputRange: [0, 300],
+              outputRange: ["#11111110", "#111111"],
             }),
+            // header에 맞춰서 페이드아웃 되는 것처럼 보이게 하려고
           }}
         />
       </Animated.View>
@@ -76,7 +77,13 @@ function ImageBackground({ focus }) {
     <>
       <Image
         source={{ uri: `https://picsum.photos/30${focus}` }}
-        style={{ width: "100%", height: 300, position: "absolute" }}
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: width,
+          marginTop: -100,
+          zIndex: -10,
+        }}
       />
       <LinearGradient
         start={{ x: 0.5, y: 0.1 }}

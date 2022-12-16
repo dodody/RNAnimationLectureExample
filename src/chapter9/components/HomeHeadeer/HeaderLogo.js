@@ -1,33 +1,37 @@
-import { Animated, Image, SafeAreaView, StyleSheet, View } from "react-native";
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from "react-native-iphone-x-helper";
-
-import Icon from "react-native-vector-icons/MaterialIcons";
 import React from "react";
+import { Animated, Image, SafeAreaView, StyleSheet, View } from "react-native";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import { LOGO_HEADER_HEIGHT } from "../../utils";
 
-export default function Header({ headerHeight, headerAnim }) {
+export default function Header({ headerAnim, headerBgAnim }) {
   return (
-    <SafeAreaView>
+    <Animated.View
+      style={{
+        backgroundColor: headerBgAnim.interpolate({
+          inputRange: [0, 70],
+          outputRange: ["#11111100", "#111"],
+        }),
+      }}
+    >
       <Animated.View
         style={[
           styles.wrapper,
           {
             opacity: headerAnim.interpolate({
-              inputRange: [0, 100],
+              inputRange: [0, LOGO_HEADER_HEIGHT],
               outputRange: [1, 0],
             }),
             marginTop: headerAnim.interpolate({
-              inputRange: [0, 100],
-              outputRange: [0, -100],
+              inputRange: [0, LOGO_HEADER_HEIGHT],
+              outputRange: [0, -(getStatusBarHeight() + 25)],
             }),
           },
         ]}
       >
         <Image
           style={{ width: 90, height: 30 }}
-          source={require("../../asset/chapter9/logo1.png")}
+          source={require("../../../asset/chapter9/logo1.png")}
         />
         <View style={{ flexDirection: "row" }}>
           <View style={styles.iconWrapper}>
@@ -43,16 +47,19 @@ export default function Header({ headerHeight, headerAnim }) {
           </View>
         </View>
       </Animated.View>
-    </SafeAreaView>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
+    height: LOGO_HEADER_HEIGHT,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-end",
+    paddingBottom: 10,
     paddingHorizontal: 10,
+    zIndex: 10,
   },
   iconWrapper: {
     height: 40,
