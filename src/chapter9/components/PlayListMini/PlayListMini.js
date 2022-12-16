@@ -10,10 +10,9 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { faker } from "@faker-js/faker";
 const { width, height } = Dimensions.get("window");
 
-export default function PlayListMini({ heightAnim, play }) {
+export default function PlayListMini({ heightAnim, play, panResponder }) {
   useEffect(() => {
     if (play) {
-      console.log(123123123);
       Animated.timing(heightAnim, {
         toValue: 0,
         useNativeDriver: false,
@@ -23,17 +22,14 @@ export default function PlayListMini({ heightAnim, play }) {
 
   return (
     <Animated.View
+      {...panResponder.panHandlers}
       style={{
-        zIndex: 0,
+        zIndex: 2,
         position: "absolute",
         left: 40 + 20,
         width: width - 40 - 20,
         justifyContent: "space-between",
         flexDirection: "row",
-        // bottom: heightAnim.interpolate({
-        //   inputRange: [-100, 0, 10],
-        //   outputRange: [-100, 0, 0],
-        // }),
       }}
     >
       {/* music title zone */}
@@ -74,7 +70,7 @@ export default function PlayListMini({ heightAnim, play }) {
         }}
       >
         {play ? (
-          <TouchableOpacity onPress={() => console.log(1)}>
+          <TouchableOpacity onPress={() => console.log(1342342)}>
             <View
               style={{
                 width: 60,
@@ -89,7 +85,7 @@ export default function PlayListMini({ heightAnim, play }) {
         ) : (
           <TouchableOpacity
             style={{ borderWidth: 1 }}
-            onPress={() => console.log(1)}
+            onPress={() => console.log(13424234232)}
           >
             <View
               style={{

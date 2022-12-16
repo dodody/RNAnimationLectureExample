@@ -48,7 +48,9 @@ export default function PlayList({ play, setPlay, heightAnim }) {
         bottom: BOTTOM_HEIGHT + getBottomSpace(),
       }}
     >
-      <View {...panResponder.panHandlers}>
+      {/* // ! 난 이 큰 영역을 다 할거야가 아니라,
+      백그라운드에만 줄거야 라고 생각해야할듯. */}
+      <View>
         <Animated.View
           style={[
             {
@@ -82,27 +84,28 @@ export default function PlayList({ play, setPlay, heightAnim }) {
             },
           ]}
         >
-          <View
+          {/* <View
             style={{
-              flex: 1,
               flexDirection: "column",
               justifyContent: "center",
             }}
-          >
-            <PlayListImage heightAnim={heightAnim} />
-            <PlayListFull
-              handleStopAnimation={handleStopAnimation}
-              heightAnim={heightAnim}
-              play={play}
-              setPlay={setPlay}
-            />
-            <PlayListMini
-              heightAnim={heightAnim}
-              play={play}
-              setPlay={setPlay}
-            />
-            {/* play, setPlay */}
-          </View>
+          > */}
+          <PlayListImage heightAnim={heightAnim} />
+          <PlayListFull
+            handleStopAnimation={handleStopAnimation}
+            heightAnim={heightAnim}
+            play={play}
+            setPlay={setPlay}
+            panResponder={panResponder}
+          />
+          {/* play, setPlay */}
+          <PlayListMini
+            panResponder={panResponder}
+            heightAnim={heightAnim}
+            play={play}
+            setPlay={setPlay}
+          />
+          {/* </View> */}
           <PlayListActionBar heightAnim={heightAnim} />
         </Animated.View>
       </View>

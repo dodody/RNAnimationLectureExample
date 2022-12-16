@@ -1,15 +1,17 @@
 import { View, Text } from "react-native";
 import React, { cloneElement } from "react";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { getBottomSpace } from "react-native-iphone-x-helper";
 
 export default function PlayListFullTop() {
   return (
     <View
       style={{
+        backgroundColor: "blue",
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        paddingTop: 20,
+        paddingTop: 20 + getBottomSpace() + 20,
       }}
     >
       <View style={{ flexDirection: "row" }}>

@@ -8,29 +8,44 @@ import PlayListFullBottom from "./PlayListFullBottom";
 
 const { width, height } = Dimensions.get("window");
 
-export default function PlayListFull({ heightAnim, handleStopAnimation }) {
+export default function PlayListFull({
+  heightAnim,
+  handleStopAnimation,
+  panResponder,
+}) {
   return (
     // ! full
     <>
       {/* top */}
-      <View style={{ position: "absolute" }}>
+      <Animated.View
+        {...panResponder.panHandlers}
+        style={{
+          position: "absolute",
+          width: width,
+          height: heightAnim.interpolate({
+            inputRange: [0, height],
+            outputRange: [0, height],
+          }),
+          zIndex: 2100,
+        }}
+      >
         <Animated.View
           style={{
             opacity: heightAnim.interpolate({
               inputRange: [0, height / 2, height],
               outputRange: [0, 0, 1],
             }),
-            width: width,
-            height: heightAnim.interpolate({
-              inputRange: [-100, 60, height],
-              outputRange: [-100, 0, height],
-            }),
+            width,
+            height,
           }}
         >
           <PlayListFullTop handleStopAnimation={handleStopAnimation} />
-          <PlayListFullController handleStopAnimation={handleStopAnimation} />
+          <PlayListFullController
+            handleStopAnimation={handleStopAnimation}
+            panResponder={panResponder}
+          />
         </Animated.View>
-      </View>
+      </Animated.View>
       {/* bottom  */}
       <PlayListFullBottom heightAnim={heightAnim} />
     </>

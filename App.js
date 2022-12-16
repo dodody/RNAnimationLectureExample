@@ -42,14 +42,14 @@ import SnowBackground from "./src/chapter3/SnowBackground";
 
 // import FlatlistCheckRenderList from "./src/chapter8/FlatlistCheckRenderList";
 
-import YoutubeMusic from "./src/chapter9/YoutubeMusic";
+// import YoutubeMusic from "./src/chapter9/YoutubeMusic";
 
 import MobilePay from "./src/chapter10/MobilePay";
 
 const App = () => {
   return (
     <View style={styles.wrapper}>
-      <YoutubeMusic />
+      <MobilePay />
     </View>
   );
 };

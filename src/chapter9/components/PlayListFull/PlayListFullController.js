@@ -8,9 +8,13 @@ import { faker } from "@faker-js/faker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const { width, height } = Dimensions.get("window");
-export default function PlayListFullController({ handleStopAnimation }) {
+export default function PlayListFullController({
+  handleStopAnimation,
+  panResponder,
+}) {
   const [thumb, setThumb] = useState();
   const onPressThumbUp = () => {
+    console.log(123123);
     handleStopAnimation();
     if (thumb === "up") {
       setThumb();
@@ -19,6 +23,7 @@ export default function PlayListFullController({ handleStopAnimation }) {
     }
   };
   const onPressThumbDown = () => {
+    console.log(123123);
     handleStopAnimation();
     if (thumb === "down") {
       setThumb();
@@ -29,11 +34,13 @@ export default function PlayListFullController({ handleStopAnimation }) {
 
   return (
     <View
+      {...panResponder.panHandlers}
       style={{
         flex: 1,
         position: "absolute",
-        bottom: 80 + getBottomSpace(),
+        bottom: getBottomSpace(),
         width: "100%",
+        borderWidth: 1,
         height:
           height -
           100 -
@@ -44,7 +51,10 @@ export default function PlayListFullController({ handleStopAnimation }) {
       }}
     >
       {/* title */}
-      <View style={{ alignItems: "center", marginTop: 50 }}>
+      <View
+        {...panResponder.panHandlers}
+        style={{ alignItems: "center", marginTop: 50 }}
+      >
         <View
           style={{
             flexDirection: "row",

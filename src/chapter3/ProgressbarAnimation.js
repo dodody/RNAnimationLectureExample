@@ -116,7 +116,7 @@ export default function ProgressbarAnimation() {
     //
     //
     //
-    // ! android 잘 작동하는ㄴ지 확인하기
+    // ! android 잘 작동하는지 확인하기
   };
 
   return (
